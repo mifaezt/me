@@ -1,11 +1,11 @@
 <template>
 	<TheHeader />
-	
+
 	<main>
 		<slot></slot>
 	</main>
-	<TheFooter />
+	<footer>
+		<TheFooter />
+	</footer>
 </template>
-<style>
-
-</style>
+<style></style>

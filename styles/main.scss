@@ -1,21 +1,23 @@
-:root {
-  --primary: #6c5ce7;
-  --secondary: #a29bfe;
-  --dark: #2d3436;
-  --light: #076b6d;
-  --accent: #fd79a8;
-  --text: #636e72;
-}
-
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Comfortaa', sans-serif;
 }
 
 body {
-  background-color: var(--light);
-  color: var(--dark);
-  overflow-x: hidden;
+	background-color: var(--accent);
+	color: var(--text);
+	overflow-x: hidden;
+}
+header {
+	font-family: 'Comfortaa', sans-serif;
+}
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	/* Добавим цвет и ширину блока для наглядности*/
+	background-color: #444;
+	width: 100%;
 }

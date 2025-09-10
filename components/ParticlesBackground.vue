@@ -1,72 +1,78 @@
 <template>
-  <!-- tsParticles Repository: https://github.com/matteobruni/tsparticles -->
-  <!-- tsParticles Website: https://particles.js.org -->
-  <Particles
-    id="tsparticles"
-    :options="options"
-    :particlesInit="particlesInit"
-  />
+	<!-- Репозиторий tsParticles: https://github.com/matteobruni/tsparticles -->
+	<!-- Сайт tsParticles: https://particles.js.org -->
+	<Particles
+		id="tsparticles"
+		:options="options"
+		:particlesInit="particlesInit"
+	/>
 </template>
 
 <script lang="ts" setup>
-import type { Engine } from "tsparticles-engine";
-import { loadSlim } from "tsparticles-slim"; // loads tsparticles-slim
-//import { loadFull } from "tsparticles"; // loads tsparticles
-import { ref } from 'vue';
+import type { Engine } from 'tsparticles-engine'
+import { loadSlim } from 'tsparticles-slim' // ⚠️ ДОБАВЬТЕ ЭТОТ ИМПОРТ
+import { ref } from 'vue'
 
-// using an empty options object will load the default options, which are static particles with no background and 3px radius, opacity 100%, white color
-// all options can be found here: https://particles.js.org/docs/interfaces/Options_Interfaces_IOptions.IOptions.html
+// использование пустого объекта options загрузит параметры по умолчанию: статичные частицы без фона, радиусом 3px, непрозрачностью 100%, белого цвета
+// все параметры можно найти здесь: https://particles.js.org/docs/interfaces/Options_Interfaces_IOptions.IOptions.html
 const options = ref({
-  background: {
-    color: "#000", // this sets a background color for the canvas
-  },
-  fullScreen: {
-    enable: true, // enabling this will make the canvas fill the entire screen, it's enabled by default
-    zIndex: -1, // this is the z-index value used when the fullScreen is enabled, it's 0 by default
-  },
-  interactivity: {
-    events: {
-      onClick: {
-        enable: true, // enables the click event, it's disabled by default
-        mode: "push", // adds the particles on click
-      },
-      onHover: {
-        enable: true, // enables the mouse hover event, it's disabled by default
-        mode: "repulse", // repulse the particles on mouse hover
-      },
-    },
-    modes: {
-      push: {
-        quantity: 1, // number of particles to add on click
-      },
-      repulse: {
-        distance: 100, // distance of the particles from the cursor
-      },
-    },
-  },
-  particles: {
-    links: {
-      distance: 100, // maximum distance for linking the particles
-      enable: true, // enabling this will make the particles linked together
-    },
-    move: {
-      enable: true, // enabling this will make particles move in the canvas
-      speed: { min: 1, max: 2 }, // using a range in speed value will make particles move in a random speed between min/max values, each particle has its own value, it won't change over time by default
-    },
-    number: {
-      value: 100,
-    },
-    opacity: {
-      value: { min: 0.3, max: 0.7 }, // using a different opacity, to have some semitransparent effects
-    },
-    size: {
-      value: { min: 1, max: 3 }, // let's randomize the particles size a bit
-    },
-  },
-});
+	background: {
+		color: 'tranparent', // устанавливает цвет фона для canvas
+	},
+	fullScreen: {
+		enable: true, // включение этого параметра заставит canvas заполнить весь экран, по умолчанию включено
+		zIndex: -1, // это значение z-index, используемое когда fullScreen включен, по умолчанию 0
+	},
+	interactivity: {
+		events: {
+			onClick: {
+				enable: true, // включает событие клика, по умолчанию отключено
+				mode: 'push', // добавляет частицы при клике
+			},
+			onHover: {
+				enable: true, // включает событие наведения курсора, по умолчанию отключено
+				mode: 'repulse', // отталкивает частицы при наведении курсора
+			},
+		},
+		modes: {
+			push: {
+				quantity: 1, // количество частиц для добавления при клике
+			},
+			repulse: {
+				distance: 50, // расстояние частиц от курсора
+			},
+		},
+	},
+	particles: {
+		links: {
+			color: '#ffffff', // цвет соединительных линий
+			opacity: 0.1, // прозрачность линий (0 - полностью прозрачные, 1 - полностью непрозрачные)
+			width: 0.5, // толщина линий в пикселях
+			distance: 100, // максимальное расстояние между частицами для соединения линиями
+			enable: true, // включение/выключение линий между частицами
+			consent: false, // требуется ли "согласие" частиц на соединение (если true - линии появляются только при определенных условиях)
+			blink: false, // мигание линий (если true - линии будут появляться и исчезать)
+			frequency: 0.5, // частота мигания/обновления линий (чем выше значение, тем чаще)
+		},
+		move: {
+			enable: true, // включение этого параметра заставит частицы двигаться на canvas
+			speed: { min: 0.5, max: 1 }, // использование диапазона скорости заставит частицы двигаться со случайной скоростью между min/max значениями, каждая частица имеет свое значение, которое по умолчанию не меняется со временем
+		},
+		number: {
+			value: 25,
+		},
+		opacity: {
+			value: { min: 0.1, max: 0.7 }, // использование различной непрозрачности для создания полупрозрачных эффектов
+		},
+		size: {
+			value: { min: 0.7, max: 1.5 }, // рандомизация размера частиц
+		},
+	},
+})
 
+// ФУНКЦИЮ ИНИЦИАЛИЗАЦИИ
 async function particlesInit(engine: Engine) {
-  await loadSlim(engine);
-  // await loadFull(engine); // for this sample the slim version is enough, choose whatever you prefer, slim is smaller in size but doesn't have all the plugins and the mouse trail feature
+	await loadSlim(engine)
+	// await loadFull(engine); // для этого примера достаточно slim версии, выбирайте что предпочитаете, slim меньше по размеру, но не имеет всех плагинов и функции следа мыши
 }
 </script>

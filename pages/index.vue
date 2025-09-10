@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="cursor"></div>
-		 <ParticlesBackground />
+
 		<!-- Навигация -->
 		<nav class="nav">
 			<div class="nav-container">
@@ -27,11 +27,8 @@
 				</div>
 			</div>
 		</nav>
-		
-	
 
 		<section id="home" class="hero">
-
 			<div class="hero-content">
 				<h1>Добро пожаловать в мое портфолио</h1>
 				<p>Здесь вы найдете информацию о моих навыках и проектах</p>
@@ -57,8 +54,6 @@
 </template>
 
 <script setup>
-
-
 // Функция переключения меню
 const toggleMenu = () => {
 	isMenuOpen.value = !isMenuOpen.value
@@ -87,15 +82,15 @@ onUnmounted(() => {
 })
 </script>
 
-<style>
+<style lang="scss" module>
 /* Добавьте стили для позиционирования частиц */
 /* #tsparticles {
-	position: absolute;
-	width: 100%;
-	height: 100vh;
-	top: 0;
-	left: 0;
-	z-index: 0;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 0;
 } */
 
 .hero {
