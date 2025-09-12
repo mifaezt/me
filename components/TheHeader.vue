@@ -1,23 +1,53 @@
 <template>
 	<header :class="$style.header">
+    		<!-- Навигация -->
+		<!-- <nav class="nav">
+			<div class="nav-container">
+				<div class="nav-logo">Portfolio</div>
+				<ul class="nav-links" :class="{ active: isMenuOpen }">
+					<li>
+						<a href="#home" class="nav-link" @click="closeMenu">Главная</a>
+					</li>
+					<li>
+						<a href="#skills" class="nav-link" @click="closeMenu">Навыки</a>
+					</li>
+					<li>
+						<a href="#projects" class="nav-link" @click="closeMenu">Проекты</a>
+					</li>
+					<li>
+						<a href="#contact" class="nav-link" @click="closeMenu">Контакты</a>
+					</li>
+				</ul>
+				<div class="burger" :class="{ active: isMenuOpen }" @click="toggleMenu">
+					<div class="line1"></div>
+					<div class="line2"></div>
+					<div class="line3"></div>
+				</div>
+			</div>
+		</nav> -->
+
+
 		<ParticlesBackground />
 		<nav :class="$style.navbar">
 			<div :class="$style.logo">IgorI</div>
 			<ul :class="[$style.navLinks, { [$style.navActive]: isNavActive }]">
-				<li>
-					<a href="#home" :class="$style.navLink" @click="closeNav">Главная</a>
+        <li>
+					<NuxtLink to="/" :class="$style.navLink" @click="closeNav">Главная</NuxtLink>
 				</li>
 				<li>
-					<a href="#skills" :class="$style.navLink" @click="closeNav">Навыки</a>
+					<NuxtLink to="/portfolio" :class="$style.navLink" @click="closeNav">Портфолио</NuxtLink>
 				</li>
 				<li>
-					<a href="#projects" :class="$style.navLink" @click="closeNav"
-						>Проекты</a
+					<NuxtLink href="#skills" :class="$style.navLink" @click="closeNav">Навыки</NuxtLink>
+				</li>
+				<li>
+					<NuxtLink href="#projects" :class="$style.navLink" @click="closeNav"
+						>Проекты</NuxtLink
 					>
 				</li>
 				<li>
-					<a href="#contact" :class="$style.navLink" @click="closeNav"
-						>Контакты</a
+					<NuxtLink href="#contact" :class="$style.navLink" @click="closeNav"
+						>Контакты</NuxtLink
 					>
 				</li>
 			</ul>
@@ -43,6 +73,33 @@ const toggleNav = () => {
 const closeNav = () => {
 	isNavActive.value = false
 }
+
+// Функция переключения меню
+const toggleMenu = () => {
+	isMenuOpen.value = !isMenuOpen.value
+}
+
+// Функция закрытия меню
+const closeMenu = () => {
+	isMenuOpen.value = false
+}
+
+// Закрытие меню при изменении размера окна
+const handleResize = () => {
+	if (window.innerWidth > 768) {
+		closeMenu()
+	}
+}
+
+// Добавляем обработчик события изменения размера окна
+onMounted(() => {
+	window.addEventListener('resize', handleResize)
+})
+
+// Убираем обработчик при размонтировании компонента
+onUnmounted(() => {
+	window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <style lang="scss" module>
@@ -204,4 +261,10 @@ const closeNav = () => {
 		transform: rotate(45deg) translate(-5px, -6px);
 	}
 }
+
+/* бургер */
+// .nav {
+// 	position: relative;
+// 	z-index: 2;
+// }
 </style>

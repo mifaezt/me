@@ -1,33 +1,5 @@
 <template>
 	<div>
-		<div class="cursor"></div>
-
-		<!-- Навигация -->
-		<nav class="nav">
-			<div class="nav-container">
-				<div class="nav-logo">Portfolio</div>
-				<ul class="nav-links" :class="{ active: isMenuOpen }">
-					<li>
-						<a href="#home" class="nav-link" @click="closeMenu">Главная</a>
-					</li>
-					<li>
-						<a href="#skills" class="nav-link" @click="closeMenu">Навыки</a>
-					</li>
-					<li>
-						<a href="#projects" class="nav-link" @click="closeMenu">Проекты</a>
-					</li>
-					<li>
-						<a href="#contact" class="nav-link" @click="closeMenu">Контакты</a>
-					</li>
-				</ul>
-				<div class="burger" :class="{ active: isMenuOpen }" @click="toggleMenu">
-					<div class="line1"></div>
-					<div class="line2"></div>
-					<div class="line3"></div>
-				</div>
-			</div>
-		</nav>
-
 		<section id="home" class="hero">
 			<div class="hero-content">
 				<h1>Добро пожаловать в мое портфолио</h1>
@@ -50,68 +22,39 @@
 			<h2>Контакты</h2>
 			<p>Свяжитесь со мной</p>
 		</section>
+
+		<h1 :class="$style['js-text-cont']">{{ displayedText }}</h1>
 	</div>
 </template>
 
 <script setup>
-// Функция переключения меню
-const toggleMenu = () => {
-	isMenuOpen.value = !isMenuOpen.value
-}
+import { ref, onMounted } from 'vue'
 
-// Функция закрытия меню
-const closeMenu = () => {
-	isMenuOpen.value = false
-}
+const displayedText = ref('')
+const text = 'Набираемая строка с каким-то текстом, которая посимвольно (с рандомной задержкой) появляется в указанном контейнере'
+let p = 0
 
-// Закрытие меню при изменении размера окна
-const handleResize = () => {
-	if (window.innerWidth > 768) {
-		closeMenu()
+function printSmbl() {
+	const timeout = Math.round(Math.random() * 100)
+	displayedText.value += text[p]
+	p++
+	if (p < text.length) {
+		setTimeout(printSmbl, timeout)
 	}
 }
 
-// Добавляем обработчик события изменения размера окна
 onMounted(() => {
-	window.addEventListener('resize', handleResize)
-})
-
-// Убираем обработчик при размонтировании компонента
-onUnmounted(() => {
-	window.removeEventListener('resize', handleResize)
+	setTimeout(printSmbl, 100)
 })
 </script>
 
 <style lang="scss" module>
-/* Добавьте стили для позиционирования частиц */
-/* #tsparticles {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  z-index: 0;
-} */
-
-.hero {
-	position: relative;
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: black;
-}
-
-.hero-content {
-	position: relative;
-	z-index: 1;
-	text-align: center;
-	/* color: white; */
-}
-
-/* Остальные ваши стили */
-.nav {
-	position: relative;
-	z-index: 2;
+.js-text-cont {
+	// Ваши стили для контейнера с текстом
+	min-height: 1.5em; // Чтобы сохранялось место для текста
+	margin: 20px 0;
+	padding: 10px;
+	border: 1px solid #ccc;
+	// background-color: #f9f9f9;
 }
 </style>

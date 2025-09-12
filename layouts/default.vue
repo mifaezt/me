@@ -1,4 +1,5 @@
 <template>
+	<div class="container"></div>
 	<TheHeader />
 
 	<main>
@@ -8,4 +9,10 @@
 		<TheFooter />
 	</footer>
 </template>
-<style></style>
+<style>
+body {
+	margin-top: 80px;
+	margin-bottom: 80px;
+}
+
+</style>
