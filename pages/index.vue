@@ -28,10 +28,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const displayedText = ref('')
-const text = 'Набираемая строка с каким-то текстом, которая посимвольно (с рандомной задержкой) появляется в указанном контейнере'
+const text = 'Welcome in my site'
 let p = 0
 
 function printSmbl() {
