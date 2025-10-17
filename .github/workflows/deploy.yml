@@ -19,33 +19,28 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            set -e  # Exit on error
-
+            set -e
             cd ~/apps/nuxt-me
 
-            echo "🔔 Starting deployment for commit: $(git log -1 --oneline)"
+            echo "🔄 Pulling latest changes..."
+            git pull origin main
 
-            # Pull latest changes
-            git fetch origin
-            git reset --hard origin/main
-
-            # Ensure we have latest images
-            docker pull node:20-alpine
-
-            # Stop and rebuild
+            echo "🐳 Stopping existing containers..."
             docker compose down
+
+            echo "🚀 Building and starting new containers..."
             docker compose up -d --build
 
-            # Health check
+            echo "⏳ Waiting for application to start..."
             sleep 10
+
+            echo "🔍 Health check..."
             if curl -f http://localhost:3001 > /dev/null 2>&1; then
               echo "✅ Application is healthy!"
             else
               echo "❌ Application health check failed!"
+              docker compose logs
               exit 1
             fi
-
-            # Cleanup
-            docker system prune -f
 
             echo "🎉 Deployment successful!"
