@@ -1,5 +1,10 @@
 <template>
 	<div>
+		<section :class="$style.mainTitle">
+			<div :class="$style.mainTitleContainer">
+				<h1 :class="$style['js-text-cont']">{{ displayedText }}</h1>
+			</div>
+		</section>
 		<section id="home" class="hero">
 			<div class="hero-content">
 				<h1>Добро пожаловать в мое портфолио</h1>
@@ -22,8 +27,6 @@
 			<h2>Контакты</h2>
 			<p>Свяжитесь со мной</p>
 		</section>
-
-		<h1 :class="$style['js-text-cont']">{{ displayedText }}</h1>
 	</div>
 </template>
 
@@ -31,7 +34,8 @@
 import { onMounted, ref } from 'vue'
 
 const displayedText = ref('')
-const text = 'Welcome in my site'
+const text =
+	'Добро пожаловать! Сайт создан для ведения портфолио моих проектов, легкого доступа к моему резюме, и другим интересностям!'
 let p = 0
 
 function printSmbl() {
@@ -54,7 +58,18 @@ onMounted(() => {
 	min-height: 1.5em; // Чтобы сохранялось место для текста
 	margin: 20px 0;
 	padding: 10px;
-	border: 1px solid #ccc;
+	color: var(--light);
+	// border: 1px solid #ccc;
 	// background-color: #f9f9f9;
+}
+
+.mainTitle {
+	background-image: url('/public/images/126761.jpg');
+	height: 300px;
+}
+
+.mainTitleContainer {
+	width: 60%;
+	@include flexible();
 }
 </style>
