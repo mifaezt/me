@@ -2,25 +2,29 @@
 	<article :class="$style.resume">
 		<header :class="$style.header">
 			<h1 :class="$style.name">Ильин Игорь Альбертович</h1>
-			<div class="mainHeaderContainer">
+			<div :class="$style.mainHeaderContainer">
+				<div :class="$style.meImgContainer">
+					<img :class="$style.meImg" src="/public/images/me.jpg" />
+					<p>
+						я с медведем <br />
+						(я слева)
+					</p>
+				</div>
 				<div :class="$style.personalInfo">
-					<p>Мужчина, 26 лет, родился 11 октября 1998</p>
+					<p>Мужчина, 27 лет, родился 11 октября 1998</p>
 					<p>
 						+7 (953) 5389063 • Telegram:
 						<a href="https://t.me/mifaest" target="_blank">@mifaest</a>
 					</p>
 					<p>
 						Email:
-						<a href="mailto:igorilin98@gmail.com">igorilin98@gmail.com</a>
+						<a href="mailto:mifaezt@gmail.com">mifaezt@gmail.com</a>
 					</p>
-					<p>Проживает: Москва • Гражданство: Россия</p>
-					<p>Готов к переезду, готов к командировкам</p>
-				</div>
-				<div :class="$style.meImgContainer">
-					<img :class="$style.meImg" src="/public/images/me.jpg" />
+					<p>Проживаю: Москва • Гражданство: Россия</p>
+					<p>Есть военник</p>
 					<p>
-						я с медведем <br />
-						(я слева)
+						Готов к переезду, готов к командировкам, в приоритете удаленный
+						формат работы
 					</p>
 				</div>
 			</div>
@@ -241,6 +245,7 @@ const skills = [
 .mainHeaderContainer {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-around;
 }
 
 .meImg {

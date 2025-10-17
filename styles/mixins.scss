@@ -1,0 +1,10 @@
+@mixin flexible() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+// Как использовать в компоненте
+// .centered-elements {
+//     @include flexible ();
+//     border: 1px solid gray;
+//   }
