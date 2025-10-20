@@ -26,16 +26,13 @@ jobs:
             git pull origin main
 
             echo "🐳 Stopping existing containers..."
-            # ДОБАВЬТЕ ЭТИ СТРОКИ:
-            docker stop nuxt-me || true
-            docker rm nuxt-me || true
             docker compose down
 
             echo "🚀 Building and starting new containers..."
             docker compose up -d --build
 
             echo "⏳ Waiting for application to start..."
-            sleep 10
+            sleep 15
 
             echo "🔍 Health check..."
             if curl -f http://localhost:3001 > /dev/null 2>&1; then
@@ -45,5 +42,8 @@ jobs:
               docker compose logs
               exit 1
             fi
+
+            echo "🧹 Cleaning up unused images..."
+            docker image prune -f
 
             echo "🎉 Deployment successful!"
