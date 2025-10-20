@@ -26,7 +26,9 @@ jobs:
             git pull origin main
 
             echo "🐳 Stopping existing containers..."
-            docker compose down
+            # Останавливаем контейнер вручную, если он запущен
+            docker stop nuxt-me || true
+            docker rm nuxt-me || true
 
             echo "🚀 Building and starting new containers..."
             docker compose up -d --build
