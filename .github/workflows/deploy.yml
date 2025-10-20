@@ -31,19 +31,22 @@ jobs:
             echo "🚀 Building and starting new containers..."
             docker compose up -d --build
 
-            echo "⏳ Waiting for application to start..."
-            sleep 15
+            echo "⏳ Waiting for application to start (30 seconds)..."
+            sleep 30
 
             echo "🔍 Health check..."
+            # Проверяем несколькими способами
             if curl -f http://localhost:3001 > /dev/null 2>&1; then
-              echo "✅ Application is healthy!"
+              echo "✅ Health check passed!"
             else
-              echo "❌ Application health check failed!"
+              echo "❌ Health check failed!"
+              echo "=== Docker Compose Logs ==="
               docker compose logs
+              echo "=== Container Status ==="
+              docker ps -a
+              echo "=== Container Processes ==="
+              docker exec nuxt-me ps aux || echo "Cannot exec into container"
               exit 1
             fi
-
-            echo "🧹 Cleaning up unused images..."
-            docker image prune -f
 
             echo "🎉 Deployment successful!"
